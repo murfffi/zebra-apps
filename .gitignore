@@ -26,3 +26,5 @@ www-test/
 .settings
 .classpath
 .project
+/zebraui/.idea
+*.iml
