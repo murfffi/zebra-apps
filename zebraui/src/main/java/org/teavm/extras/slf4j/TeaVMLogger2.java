@@ -18,10 +18,10 @@ package org.teavm.extras.slf4j;
 import org.slf4j.Logger;
 import org.slf4j.Marker;
 
-public class TeaVMLogger implements Logger {
+public class TeaVMLogger2 implements Logger {
 	private String name;
 
-	public TeaVMLogger(String name) {
+	public TeaVMLogger2(String name) {
 		this.name = name;
 	}
 
@@ -32,7 +32,7 @@ public class TeaVMLogger implements Logger {
 
 	@Override
 	public boolean isTraceEnabled() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -87,23 +87,27 @@ public class TeaVMLogger implements Logger {
 
 	@Override
 	public boolean isDebugEnabled() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void debug(String msg) {
+		log("DEBUG", msg);
 	}
 
 	@Override
 	public void debug(String format, Object arg) {
+		log("DEBUG", format, arg);
 	}
 
 	@Override
 	public void debug(String format, Object arg1, Object arg2) {
+		log("DEBUG", format, arg1, arg2);
 	}
 
 	@Override
 	public void debug(String format, Object... arguments) {
+		log("DEBUG", format, arguments);
 	}
 
 	@Override

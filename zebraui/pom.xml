@@ -61,13 +61,13 @@
 		<dependency>
 			<groupId>zebra4j</groupId>
 			<artifactId>zebra4j</artifactId>
-			<version>0.4.1-SNAPSHOT</version>
+			<version>0.5-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>zebra4j</groupId>
 			<artifactId>zebra4j</artifactId>
-			<version>0.4.1-SNAPSHOT</version>
+			<version>0.5-SNAPSHOT</version>
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
@@ -88,11 +88,6 @@
 			<groupId>org.teavm</groupId>
 			<artifactId>teavm-extras-slf4j</artifactId>
 			<version>0.6.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.usefultoys</groupId>
-			<artifactId>slf4j-toys</artifactId>
-			<version>1.6.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -138,7 +133,7 @@
 				<artifactId>teavm-maven-plugin</artifactId>
 				<version>${teavm.version}</version>
 				<dependencies>
-					<!-- This dependency is required by TeaVM to emulate subset of Java 
+					<!-- This dependency is required by TeaVM to emulate subset of Java
 						class library -->
 					<dependency>
 						<groupId>zebra4j</groupId>
@@ -153,25 +148,25 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
-							<!-- Directory where TeaVM should put generated files. This configuration 
+							<!-- Directory where TeaVM should put generated files. This configuration
 								conforms to the settings of the WAR plugin -->
 							<targetDirectory>${project.build.directory}/generated/js/teavm</targetDirectory>
 
 							<!-- Main class, containing static void main(String[]) -->
 							<mainClass>zebra4j.apps.Client</mainClass>
 
-							<!-- Whether TeaVM should produce minified JavaScript. Can reduce 
+							<!-- Whether TeaVM should produce minified JavaScript. Can reduce
 								JavaScript file size more than two times -->
 							<minifying>false</minifying>
 
-							<!-- Whether TeaVM should produce debug information for its built-in 
+							<!-- Whether TeaVM should produce debug information for its built-in
 								debugger -->
 							<debugInformationGenerated>true</debugInformationGenerated>
 
 							<!-- Whether TeaVM should produce source maps file -->
 							<sourceMapsGenerated>true</sourceMapsGenerated>
 
-							<!-- Whether TeaVM should also put source files into output directory, 
+							<!-- Whether TeaVM should also put source files into output directory,
 								for compatibility with source maps -->
 							<sourceFilesCopied>true</sourceFilesCopied>
 
@@ -186,18 +181,21 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.16</version>
 				<configuration>
-					<argLine>-Xmx512m</argLine>
+					<argLine>-Xmx512m -ea</argLine>
 					<systemProperties>
 						<teavm.junit.target>${project.build.directory}/js-tests</teavm.junit.target>
-						<teavm.junit.minified>true</teavm.junit.minified>
-						<teavm.junit.optimized>true</teavm.junit.optimized>
+						<teavm.junit.minified>false</teavm.junit.minified>
+						<teavm.junit.optimized>false</teavm.junit.optimized>
+						<teavm.junit.js.runner>htmlunit</teavm.junit.js.runner>
+						<teavm.junit.js.decodeStack>false</teavm.junit.js.decodeStack>
+						<teavm.junit.threads>6</teavm.junit.threads>
 					</systemProperties>
 				</configuration>
 			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>

@@ -398,6 +398,9 @@ public final class TMath extends TObject {
 		return TFloat.intBitsToFloat(bits);
 	}
 
+	/**
+	 * ZEBRA4J: Partial implementation used in ChocoSolver
+	 */
 	public static int addExact(int x, int y) {
 		return x + y;
 	}

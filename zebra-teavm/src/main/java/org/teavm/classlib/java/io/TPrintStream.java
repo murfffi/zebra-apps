@@ -231,6 +231,10 @@ public class TPrintStream extends TFilterOutputStream {
 		print('\n');
 	}
 
+	/**
+	 * ZEBRA4J: No-op implementation referenced by ChocoSolver, but not used at
+	 * runtime
+	 */
 	public TPrintStream printf(String format, Object... args) {
 		return this;
 	}
