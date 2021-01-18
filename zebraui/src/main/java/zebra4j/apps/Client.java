@@ -1,17 +1,26 @@
 package zebra4j.apps;
 
-import org.teavm.jso.dom.html.HTMLDocument;
-import org.teavm.jso.dom.html.HTMLElement;
+import java.util.Locale;
 
-import zebra4j.*;
+import org.teavm.jso.JSBody;
+
+import zebra4j.Criminal;
+import zebra4j.QuestionPuzzleGenerator;
 
 public class Client {
+
+	@JSBody(params = { "message" }, script = "console.log(message)")
+	public static native void log(String message);
+
+	@JSBody(params = { "name", "func" }, script = "window[name] = func")
+	public static native void setGenerator(String name, Generator func);
+
+	@JSBody(params = { "name", "numPeople" }, script = "console.log(window[name](numPeople))")
+	public static native void logFunc(String name, int numPeople);
+
 	public static void main(String[] args) {
-		// System.setErr(LoggerFactory.getErrorPrintStream(LoggerFactory.getLogger(Client.class)));
-		QuestionPuzzle puzzle = QuestionPuzzleGenerator.randomPuzzle(3);
-		HTMLDocument document = HTMLDocument.current();
-		HTMLElement div = document.createElement("div");
-		div.appendChild(document.createTextNode(puzzle.toString()));
-		document.getBody().appendChild(div);
+		setGenerator("question", numPeople -> QuestionPuzzleGenerator.randomPuzzle(numPeople).toString());
+		log("Function initialized.");
+		log(Criminal.TYPE.describeSet(null, Locale.getDefault()));
 	}
 }

@@ -77,6 +77,11 @@
 			<version>${teavm.version}</version>
 			<scope>test</scope>
 		</dependency>
+    <dependency>
+      <groupId>org.teavm.flavour</groupId>
+      <artifactId>teavm-flavour-json</artifactId>
+      <version>0.2.1</version>
+    </dependency>		
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
