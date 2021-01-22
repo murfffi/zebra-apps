@@ -45,7 +45,7 @@ public class Client {
 				sampleSolution, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
 		QuestionPuzzle puzzle = generator.generate();
 		PuzzleDescription description = new PuzzleDescription();
-		description.facts = puzzle.getPuzzle().describe(locale);
+		description.facts = puzzle.getPuzzle().describeConstraints(locale);
 		description.question = puzzle.getQuestion().toSentence(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
 		description.answerOptions = puzzle.getPuzzle().getAttributeSets().get(about).stream()
