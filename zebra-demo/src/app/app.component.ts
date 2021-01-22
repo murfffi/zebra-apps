@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     main();
+    console.log(window["question"](3))
   }
 
   title = 'zebra-demo';
