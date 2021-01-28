@@ -46,7 +46,7 @@ public class Client {
 		QuestionPuzzle puzzle = generator.generate();
 		PuzzleDescription description = new PuzzleDescription();
 		description.facts = puzzle.getPuzzle().describeConstraints(locale);
-		description.question = puzzle.getQuestion().toSentence(locale);
+		description.question = puzzle.getQuestion().describe(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
 		description.answerOptions = puzzle.getPuzzle().getAttributeSets().get(about).stream()
 				.map(Attribute::description).collect(Collectors.toList());
