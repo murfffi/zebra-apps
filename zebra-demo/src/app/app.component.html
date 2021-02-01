@@ -10,7 +10,15 @@
   </header>
   <div class="content-container">
     <div class="content-area">
-      ...
+      <p>Facts:</p>
+      <ul class="list compact">
+        <li *ngFor="let fact of currentPuzzle.facts">{{ fact }}</li>
+      </ul>
+      <p>{{ currentPuzzle.question}}</p>
+      <select clrSelect name="answerSelect">
+        <option value="">Please select ...</option>
+        <option *ngFor="let answer of currentPuzzle.answerOptions" value="{{ answer }}">{{ answer }}</option>
+      </select>
     </div>
     <div id="puzzle"></div>
   </div>

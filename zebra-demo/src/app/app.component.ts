@@ -9,10 +9,21 @@ declare function main(): any;
 })
 export class AppComponent implements OnInit {
 
+  currentPuzzle: PuzzleDescription;
+
   ngOnInit(): void {
     main();
-    console.log(window["question"](3))
+    let puzzleJson = window["question"](3) as string;
+    this.currentPuzzle = JSON.parse(puzzleJson) as PuzzleDescription;
+    console.log(this.currentPuzzle);
   }
 
   title = 'zebra-demo';
+}
+
+export interface PuzzleDescription {
+  facts: Array<string>;
+  question: string;
+  answerOptions: Array<string>;
+  answer: string;
 }
