@@ -8,3 +8,7 @@ zebra4j.bundle.PersonName
 zebra4j.bundle.PersonName_bg
 zebra4j.bundle.Criminal
 zebra4j.bundle.Criminal_bg
+zebra4j.bundle.fact.BothTrue
+zebra4j.bundle.fact.BothTrue_bg
+zebra4j.bundle.fact.Different
+zebra4j.bundle.fact.Different_bg

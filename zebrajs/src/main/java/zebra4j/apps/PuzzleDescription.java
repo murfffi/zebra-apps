@@ -12,4 +12,10 @@ public class PuzzleDescription {
 	public List<String> answerOptions;
 	public String answer;
 
+	@Override
+	public String toString() {
+		return "PuzzleDescription\n[facts=" + facts + ",\nquestion=" + question + ",\nanswerOptions=" + answerOptions
+				+ ",\nanswer=" + answer + "]";
+	}
+
 }
