@@ -19,6 +19,10 @@ export class AppComponent implements OnInit {
   }
 
   title = 'zebra-demo';
+
+  select(): void {
+    
+  }
 }
 
 export interface PuzzleDescription {

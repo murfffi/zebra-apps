@@ -14,8 +14,8 @@
       <ul class="list compact">
         <li *ngFor="let fact of currentPuzzle.facts">{{ fact }}</li>
       </ul>
-      <p>{{ currentPuzzle.question}}</p>
-      <select clrSelect name="answerSelect">
+      <p>{{ currentPuzzle.question }}</p>
+      <select clrSelect name="answerSelect" (select)="select()">
         <option value="">Please select ...</option>
         <option *ngFor="let answer of currentPuzzle.answerOptions" value="{{ answer }}">{{ answer }}</option>
       </select>
