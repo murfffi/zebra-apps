@@ -28,3 +28,4 @@ www-test/
 .project
 .idea
 *.iml
+zebra-demo/debug.log
