@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.teavm.flavour.json.JSON;
 import org.teavm.jso.JSBody;
 
-import zebra4j.Attribute;
 import zebra4j.AttributeType;
 import zebra4j.Criminal;
 import zebra4j.PuzzleSolution;
@@ -49,8 +48,8 @@ public class Client {
 		description.question = puzzle.getQuestion().describe(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
 		description.answerOptions = puzzle.getPuzzle().getAttributeSets().get(about).stream()
-				.map(Attribute::description).collect(Collectors.toList());
-		description.answer = puzzle.getQuestion().answer(sampleSolution).get().description();
+				.map(a -> a.description(locale)).collect(Collectors.toList());
+		description.answer = puzzle.getQuestion().answer(sampleSolution).get().description(locale);
 		return description;
 	}
 }
