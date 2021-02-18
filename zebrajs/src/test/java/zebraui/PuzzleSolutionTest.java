@@ -30,9 +30,9 @@ public class PuzzleSolutionTest {
 
 	public static PuzzleSolution otherSolution() {
 		PuzzleSolutionBuilder builder = new PuzzleSolutionBuilder();
-		builder.add(PersonName.ГЕОРГИ, Clothes.ЖЪЛТИ, new AtHouse(2));
-		builder.add(PersonName.ПЕТЪР, Clothes.СИНИ, new AtHouse(1));
-		builder.add(PersonName.ИВАН, Clothes.ЗЕЛЕНИ, new AtHouse(3));
+		builder.add(PersonName.GEORGE, Clothes.ЖЪЛТИ, new AtHouse(2));
+		builder.add(PersonName.PETER, Clothes.СИНИ, new AtHouse(1));
+		builder.add(PersonName.IVAN, Clothes.ЗЕЛЕНИ, new AtHouse(3));
 		PuzzleSolution solution = builder.build();
 		return solution;
 	}
