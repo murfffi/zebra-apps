@@ -32,7 +32,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>zebra4j.apps</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>zebra-teavm</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<scope>test</scope>
@@ -109,7 +109,6 @@
 			<!-- Configure Java compiler to use Java 8 syntax -->
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -144,7 +143,7 @@
 					<!-- This dependency is required by TeaVM to emulate subset of Java
 						class library -->
 					<dependency>
-						<groupId>zebra4j.app</groupId>
+						<groupId>${project.groupId}</groupId>
 						<artifactId>zebra-teavm</artifactId>
 						<version>1.0-SNAPSHOT</version>
 					</dependency>
@@ -187,7 +186,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.16</version>
 				<configuration>
 					<argLine>-Xmx512m -ea</argLine>
 					<systemProperties>
