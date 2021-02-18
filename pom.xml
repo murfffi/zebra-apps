@@ -11,6 +11,29 @@
 		<module>zebra-teavm</module>
 		<module>zebrajs</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>teavm-dev</id>
+			<url>https://dl.bintray.com/konsoletyper/teavm</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>bintray-marin-nozhchev</id>
+			<url>https://dl.bintray.com/marin-nozhchev/marin-nozhchev</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<teavm.version>0.7.0-dev-1169</teavm.version>
+		<zebra4j.version>0.5</zebra4j.version>
+	</properties>	
 	<build>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
 				defaults (may be moved to parent pom) -->

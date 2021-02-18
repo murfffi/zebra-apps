@@ -7,7 +7,6 @@ import org.teavm.flavour.json.JSON;
 import org.teavm.jso.JSBody;
 
 import zebra4j.AttributeType;
-import zebra4j.Criminal;
 import zebra4j.PuzzleSolution;
 import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
@@ -28,8 +27,6 @@ public class Client {
 	public static void main(String[] args) {
 		setGenerator("question", Client::generateQuestionPuzzle);
 		log("Function initialized.");
-		log(Criminal.TYPE.describeSet(null, Locale.getDefault()));
-		log(generateQuestionPuzzle(3));
 	}
 
 	static String generateQuestionPuzzle(int numPeople) {
