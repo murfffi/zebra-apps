@@ -13,6 +13,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]    
 
     steps:
     - uses: actions/checkout@v2
@@ -32,3 +35,21 @@ jobs:
     - name: Build with Maven (skip tests)
       if: steps.changed-zebrajs.outputs.changed != 'true'
       run: mvn -B package -DskipTests
+
+    - name: Cache node modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Node $
+      uses: actions/setup-node@v1
+      with:
+        node-version: $
+
+    - name: npm install and npm run build
+      run: |
+        npm ci
+        npm run build:ci
