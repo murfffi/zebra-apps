@@ -44,10 +44,10 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Node $
+    - name: Node ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
-        node-version: $
+        node-version: ${{ matrix.node-version }}
 
     - name: npm install and npm run build
       run: |
