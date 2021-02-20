@@ -53,3 +53,4 @@ jobs:
       run: |
         npm ci
         npm run build:ci
+      working-directory: ./zebra-demo
