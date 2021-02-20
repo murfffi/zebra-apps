@@ -24,7 +24,14 @@ jobs:
     - uses: marceloprado/has-changed-path@v1
       id: changed-zebrajs
       with:
-        paths: pom.xml zebrajs zebra-teavm        
+        paths: pom.xml zebrajs zebra-teavm
+    - name: Cache local Maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-               
     - name: Set up JDK 1.8      
       uses: actions/setup-java@v1
       with:
@@ -54,3 +61,9 @@ jobs:
         npm ci
         npm run build:ci
       working-directory: ./zebra-demo
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: zebra-demo-dist
+        path: |
+          zebra-demo/dist
