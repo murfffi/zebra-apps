@@ -19,29 +19,34 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      with:
-        fetch-depth: 10
-    - uses: marceloprado/has-changed-path@v1
-      id: changed-zebrajs
-      with:
-        paths: pom.xml zebrajs zebra-teavm
+      # with:
+      #   fetch-depth: 10
+    # - uses: marceloprado/has-changed-path@v1
+    #   id: changed-zebrajs
+    #   with:
+    #     paths: pom.xml zebrajs zebra-teavm
     - name: Cache local Maven repository
       uses: actions/cache@v2
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
-          ${{ runner.os }}-maven-               
-    - name: Set up JDK 1.8      
+          ${{ runner.os }}-maven-    
+    - name: Cache zebrajs
+      id: cache-zebrajs
+      uses: actions/cache@v2
+      with:
+        path: zebrajs/target/generated/js/teavm/classes.js
+        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml', 'zebrajs/**', 'zebra-teavm/**') }}                            
+    - name: Set up JDK 1.8
+      # https://github.com/actions/cache#Skipping-steps-based-on-cache-hit
+      if: steps.cache-zebrajs.outputs.cache-hit != 'true'     
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
     - name: Build and test with Maven
-      if: steps.changed-zebrajs.outputs.changed == 'true'
+      if: steps.cache-zebrajs.outputs.cache-hit != 'true'
       run: mvn -B package --file pom.xml
-    - name: Build with Maven (skip tests)
-      if: steps.changed-zebrajs.outputs.changed != 'true'
-      run: mvn -B package -DskipTests
 
     - name: Cache node modules
       uses: actions/cache@v1
