@@ -144,11 +144,11 @@
 
 							<!-- Whether TeaVM should produce minified JavaScript. Can reduce 
 								JavaScript file size more than two times -->
-							<minifying>false</minifying>
+							<minifying>true</minifying>
 
 							<!-- Whether TeaVM should produce debug information for its built-in 
 								debugger -->
-							<debugInformationGenerated>true</debugInformationGenerated>
+							<debugInformationGenerated>false</debugInformationGenerated>
 
 							<!-- Whether TeaVM should produce source maps file -->
 							<sourceMapsGenerated>true</sourceMapsGenerated>
