@@ -3,7 +3,12 @@
   <li *ngFor="let fact of currentPuzzle.facts">{{ fact }}</li>
 </ul>
 <p>{{ currentPuzzle.question }}</p>
-<select clrSelect name="answerSelect" (select)="select()">
+<select clrSelect name="answerSelect" (change)="select($event.target.value)" *ngIf="!completed">
   <option value="">Please select ...</option>
   <option *ngFor="let answer of currentPuzzle.answerOptions" value="{{ answer }}">{{ answer }}</option>
 </select>
+<div *ngIf="completed">
+  <p>{{ selected }}</p>
+  <p>{{ correct }}</p>
+</div>
+<p>Seed for generating this puzzle: {{ currentPuzzle.seed }} (for debugging)</p>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 declare function main(): any;
 
@@ -6,10 +6,12 @@ declare function main(): any;
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GameComponent implements OnInit {
   currentPuzzle: PuzzleDescription;
+  selected: string;
+
+  completed = false;
 
   constructor() { }
 
@@ -19,7 +21,10 @@ export class GameComponent implements OnInit {
     this.currentPuzzle = JSON.parse(puzzleJson) as PuzzleDescription;    
   }
 
-  select(): void {
+  select(value: string): void {
+    this.completed = true;
+    this.selected = value;
+    console.log("Completed.");
     
   }
 
@@ -30,4 +35,5 @@ export interface PuzzleDescription {
   question: string;
   answerOptions: Array<string>;
   answer: string;
+  seed: number;
 }
