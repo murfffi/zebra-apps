@@ -11,6 +11,7 @@ public class PuzzleDescription {
 	public String question;
 	public List<String> answerOptions;
 	public String answer;
+	public long seed;
 
 	@Override
 	public String toString() {

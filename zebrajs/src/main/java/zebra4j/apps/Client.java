@@ -1,17 +1,21 @@
 package zebra4j.apps;
 
 import java.util.Locale;
+import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.teavm.flavour.json.JSON;
 import org.teavm.jso.JSBody;
 
 import zebra4j.AttributeType;
+import zebra4j.Attributes;
 import zebra4j.PuzzleSolution;
 import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
 import zebra4j.QuestionPuzzleGenerator;
 import zebra4j.SolutionGenerator;
+import zebra4j.fact.Fact;
 
 public class Client {
 
@@ -36,11 +40,13 @@ public class Client {
 
 	public static PuzzleDescription generateQuestionPuzzleDescription(int numPeople) {
 		Locale locale = Locale.getDefault();
-		PuzzleSolution sampleSolution = new SolutionGenerator(numPeople).generate();
-		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution),
-				sampleSolution, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
-		QuestionPuzzle puzzle = generator.generate();
 		PuzzleDescription description = new PuzzleDescription();
+		description.seed = System.currentTimeMillis();
+		Random rnd = new Random(description.seed);
+		PuzzleSolution sampleSolution = new SolutionGenerator(Attributes.DEFAULT_TYPES, numPeople, rnd).generate();
+		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution),
+				sampleSolution, rnd, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
+		QuestionPuzzle puzzle = generator.generate();
 		description.facts = puzzle.getPuzzle().describeConstraints(locale);
 		description.question = puzzle.getQuestion().describe(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
