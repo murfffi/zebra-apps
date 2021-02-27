@@ -44,7 +44,7 @@ public class Client {
 		description.seed = System.currentTimeMillis();
 		Random rnd = new Random(description.seed);
 		PuzzleSolution sampleSolution = new SolutionGenerator(Attributes.DEFAULT_TYPES, numPeople, rnd).generate();
-		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution),
+		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution.getAttributeSets(), rnd),
 				sampleSolution, rnd, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
 		QuestionPuzzle puzzle = generator.generate();
 		description.facts = puzzle.getPuzzle().describeConstraints(locale);

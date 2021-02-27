@@ -11,21 +11,42 @@ export class GameComponent implements OnInit {
   currentPuzzle: PuzzleDescription;
   selected: string;
 
+  generating = false;
   completed = false;
 
   constructor() { }
 
   ngOnInit(): void {
     main();
-    let puzzleJson = window["question"](3) as string;
-    this.currentPuzzle = JSON.parse(puzzleJson) as PuzzleDescription;    
+    this.generateAsync();   
   }
 
   select(value: string): void {
     this.completed = true;
     this.selected = value;
     console.log("Completed.");
-    
+  }
+
+  reset() : void {
+    this.completed = false;
+    this.selected = '';
+    this.generateAsync();
+  }
+
+  generate() : PuzzleDescription {
+    let puzzleJson = window["question"](3) as string;
+    return JSON.parse(puzzleJson) as PuzzleDescription;    
+  }
+
+  async generateAsync() {
+    this.generating = true;
+    const myPromise = new Promise<PuzzleDescription>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.generate());
+      }, 100);
+    });
+    this.currentPuzzle = await myPromise;
+    this.generating = false;   
   }
 
 }

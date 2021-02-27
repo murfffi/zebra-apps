@@ -8,7 +8,11 @@
   <option *ngFor="let answer of currentPuzzle.answerOptions" value="{{ answer }}">{{ answer }}</option>
 </select>
 <div *ngIf="completed">
-  <p>{{ selected }}</p>
-  <p>{{ correct }}</p>
+  <p>Selected: {{ selected }}</p>
+  <p>Correct: {{ currentPuzzle.answer }}</p>
+  <button class="btn btn-primary" (click)="reset()">Try Another Puzzle</button>
 </div>
+<p *ngIf="generating">
+  <clr-spinner [clrMedium]="true"></clr-spinner>
+</p>
 <p>Seed for generating this puzzle: {{ currentPuzzle.seed }} (for debugging)</p>
