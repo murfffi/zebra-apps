@@ -18,7 +18,7 @@ export class GameComponent implements OnInit {
 
   ngOnInit(): void {
     main();
-    this.generateAsync();   
+    this.currentPuzzle = this.generate();  
   }
 
   select(value: string): void {
