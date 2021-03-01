@@ -28,6 +28,6 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('span.title').textContent).toContain('Zebra4J Demos');
+    expect(compiled.querySelector('span.title').textContent).toContain('Zebra4J/JS');
   });
 });

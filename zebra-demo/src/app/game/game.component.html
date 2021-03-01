@@ -3,7 +3,7 @@
   <li *ngFor="let fact of currentPuzzle.facts">{{ fact }}</li>
 </ul>
 <p>{{ currentPuzzle.question }}</p>
-<select clrSelect name="answerSelect" (change)="select($event.target.value)" *ngIf="!completed">
+<select clrSelect name="answerSelect" (change)="select($event)" *ngIf="!completed">
   <option value="">Please select ...</option>
   <option *ngFor="let answer of currentPuzzle.answerOptions" value="{{ answer }}">{{ answer }}</option>
 </select>

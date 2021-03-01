@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-declare function main(): any;
+declare function main(): void;
+
+declare global {
+  interface Window { question: (p: number) => string; }
+}
 
 @Component({
   selector: 'app-game',
@@ -9,19 +13,21 @@ declare function main(): any;
 })
 export class GameComponent implements OnInit {
   currentPuzzle: PuzzleDescription;
-  selected: string;
+  selected = '';
 
   generating = false;
   completed = false;
 
-  constructor() { }
+  constructor() {
+    main();
+    this.currentPuzzle = this.generate();      
+   }
 
   ngOnInit(): void {
-    main();
-    this.currentPuzzle = this.generate();  
   }
 
-  select(value: string): void {
+  select(event: Event): void {
+    const value = (event.target as HTMLInputElement).value
     this.completed = true;
     this.selected = value;
     console.log("Completed.");
@@ -34,7 +40,7 @@ export class GameComponent implements OnInit {
   }
 
   generate() : PuzzleDescription {
-    let puzzleJson = window["question"](3) as string;
+    let puzzleJson = window.question(3);
     return JSON.parse(puzzleJson) as PuzzleDescription;    
   }
 
