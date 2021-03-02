@@ -16,20 +16,12 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]    
+    runs-on: ubuntu-20.04
 
     steps:
     - uses: actions/checkout@v2
-      # with:
-      #   fetch-depth: 10
-    # - uses: marceloprado/has-changed-path@v1
-    #   id: changed-zebrajs
-    #   with:
-    #     paths: pom.xml zebrajs zebra-teavm
     - name: Cache local Maven repository
+      # https://github.com/actions/cache/blob/main/examples.md#java---maven
       uses: actions/cache@v2
       with:
         path: ~/.m2/repository
@@ -41,18 +33,19 @@ jobs:
       uses: actions/cache@v2
       with:
         path: zebrajs/target/generated/js/teavm/classes.js
-        key: ${{ runner.os }}-maven-${{ hashFiles('pom.xml', 'zebrajs/**', 'zebra-teavm/**') }}                            
-    - name: Set up JDK 1.8
+        key: ${{ runner.os }}-jdk11-${{ hashFiles('pom.xml', 'zebrajs/**', 'zebra-teavm/**') }}                            
+    - name: Set up JDK
       # https://github.com/actions/cache#Skipping-steps-based-on-cache-hit
       if: steps.cache-zebrajs.outputs.cache-hit != 'true'     
       uses: actions/setup-java@v1
       with:
-        java-version: 1.8
+        java-version: '11'
     - name: Build and test with Maven
       if: steps.cache-zebrajs.outputs.cache-hit != 'true'
       run: mvn -B package --file pom.xml
 
     - name: Cache node modules
+      # https://github.com/actions/cache/blob/main/examples.md#node---npm
       uses: actions/cache@v1
       with:
         path: ~/.npm
@@ -60,19 +53,16 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: Node ${{ matrix.node-version }}
+    # https://docs.github.com/en/actions/guides/building-and-testing-nodejs
+    - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '12.x'
 
     - name: npm install and npm run build
+      # https://coryrylan.com/blog/building-angular-cli-projects-with-github-actions
       run: |
         npm ci
         npm run build:ci
       working-directory: ./zebra-demo
-    - name: Archive production artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: zebra-demo-dist
-        path: |
-          zebra-demo/dist
+
