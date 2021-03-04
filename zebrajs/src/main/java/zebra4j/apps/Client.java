@@ -2,7 +2,6 @@ package zebra4j.apps;
 
 import java.util.Locale;
 import java.util.Random;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.teavm.flavour.json.JSON;
@@ -15,7 +14,6 @@ import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
 import zebra4j.QuestionPuzzleGenerator;
 import zebra4j.SolutionGenerator;
-import zebra4j.fact.Fact;
 
 public class Client {
 
@@ -34,15 +32,15 @@ public class Client {
 	}
 
 	static String generateQuestionPuzzle(int numPeople) {
-		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople);
+		long seed = System.currentTimeMillis();
+		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, new SeededRandom(seed), seed);
 		return JSON.serialize(description).stringify();
 	}
 
-	public static PuzzleDescription generateQuestionPuzzleDescription(int numPeople) {
+	public static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Random rnd, long seed) {
 		Locale locale = Locale.getDefault();
 		PuzzleDescription description = new PuzzleDescription();
-		description.seed = System.currentTimeMillis();
-		Random rnd = new Random(description.seed);
+		description.seed = seed;
 		PuzzleSolution sampleSolution = new SolutionGenerator(Attributes.DEFAULT_TYPES, numPeople, rnd).generate();
 		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution.getAttributeSets(), rnd),
 				sampleSolution, rnd, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);

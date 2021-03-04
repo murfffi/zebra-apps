@@ -43,6 +43,8 @@ jobs:
     - name: Build and test with Maven
       if: steps.cache-zebrajs.outputs.cache-hit != 'true'
       run: mvn -B package --file pom.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
 
     - name: Cache node modules
       # https://github.com/actions/cache/blob/main/examples.md#node---npm

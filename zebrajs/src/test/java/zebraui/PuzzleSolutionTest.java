@@ -22,7 +22,7 @@ public class PuzzleSolutionTest {
 	 */
 	@Test
 	public void testEqualsHashcode() {
-		PuzzleSolution sol = PuzzleGeneratorTest.sampleSolution();
+		PuzzleSolution sol = zebra4j.PuzzleGeneratorTest.sampleSolution();
 		Assert.assertEquals(sol, new PuzzleSolution(sol.getPeople(), new HashMap<>(sol.getAttributeSets())));
 		Assert.assertEquals(sol, otherSolution());
 		Assert.assertEquals(sol.hashCode(), otherSolution().hashCode());
