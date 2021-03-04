@@ -1,9 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 
+
 declare function main(): void;
 
+// TODO try to fix using https://stackoverflow.com/a/35961176/1551798
+declare var require: any;
+
 declare global {
-  interface Window { question: (p: number) => string; }
+  interface Window { 
+    question: (p: number) => string; 
+    
+  }
+
+  interface Math {
+    seedrandom: (seed: string) => void;
+  }
 }
 
 @Component({
@@ -19,6 +30,8 @@ export class GameComponent implements OnInit {
   completed = false;
 
   constructor() {
+    const seedrandom = require('seedrandom');
+    window.Math.seedrandom = seedrandom;
     main();
     this.currentPuzzle = this.generate();      
    }
