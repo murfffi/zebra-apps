@@ -12,6 +12,10 @@ public class SeededRandom extends Random {
 		seedRandom(String.valueOf(seed));
 	}
 
+	public SeededRandom(String seed) {
+		seedRandom(seed);
+	}
+
 	@JSBody(params = { "seed" }, script = "Math.seedrandom(seed);")
 	private static native void seedRandom(String seed);
 

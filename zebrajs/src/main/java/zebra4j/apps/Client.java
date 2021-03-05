@@ -18,26 +18,31 @@ import zebra4j.SolutionGenerator;
 public class Client {
 
 	@JSBody(params = { "message" }, script = "console.log(message)")
-	public static native void log(String message);
+	private static native void log(String message);
 
 	@JSBody(params = { "name", "func" }, script = "window[name] = func")
-	public static native void setGenerator(String name, Generator func);
+	private static native void setGenerator(String name, Generator func);
 
-	@JSBody(params = { "name", "numPeople" }, script = "console.log(window[name](numPeople))")
-	public static native void logFunc(String name, int numPeople);
+	@JSBody(params = { "name", "func" }, script = "window[name] = func")
+	private static native void setSeededGenerator(String name, SeededGenerator func);
 
 	public static void main(String[] args) {
 		setGenerator("question", Client::generateQuestionPuzzle);
+		setSeededGenerator("zebra4jGenerateQuestionPuzzle", Client::generatePuzzleWithSeed);
 		log("Function initialized.");
 	}
 
-	static String generateQuestionPuzzle(int numPeople) {
+	private static String generateQuestionPuzzle(int numPeople) {
 		long seed = System.currentTimeMillis();
+		return generatePuzzleWithSeed(numPeople, String.valueOf(seed));
+	}
+
+	private static String generatePuzzleWithSeed(int numPeople, String seed) {
 		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, new SeededRandom(seed), seed);
 		return JSON.serialize(description).stringify();
 	}
 
-	public static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Random rnd, long seed) {
+	static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Random rnd, String seed) {
 		Locale locale = Locale.getDefault();
 		PuzzleDescription description = new PuzzleDescription();
 		description.seed = seed;
