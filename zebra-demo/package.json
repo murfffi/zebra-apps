@@ -11,7 +11,9 @@
     "test:watch": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:ci": "npm run clean && npm run test && npm run build:prod"
+    "build:ci": "npm run clean && npm run test && npm run build:prod",
+    "build:gh": "ng build --prod --base-href=/zebra-apps/demo/",
+    "deploy" : "rm -r ../docs/demo/* && cp -r dist/zebra-demo/* ../docs/demo"
   },
   "private": true,
   "dependencies": {
