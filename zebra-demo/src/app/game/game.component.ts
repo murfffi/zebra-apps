@@ -75,5 +75,5 @@ export interface PuzzleDescription {
   question: string;
   answerOptions: Array<string>;
   answer: string;
-  seed: number;
+  seed: string;
 }

@@ -19,7 +19,12 @@ describe('GameComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create valid puzzle', () => {
     expect(component).toBeTruthy();
+    const puzzle = component.currentPuzzle;
+    expect(puzzle).toBeTruthy();
+    expect(puzzle.seed.length).toBeGreaterThan(0);
+    expect(puzzle.answerOptions.length).toBeGreaterThan(0);
+    expect(puzzle.facts.length).toBeGreaterThan(0);
   });
 });
