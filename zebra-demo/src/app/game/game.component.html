@@ -15,4 +15,4 @@
 <p *ngIf="generating">
   <clr-spinner [clrMedium]="true"></clr-spinner>
 </p>
-<p>Seed for generating this puzzle: {{ currentPuzzle.seed }} (for debugging)</p>
+<p>Seed for generating this puzzle: <a [href]='"#" + currentPuzzle.seed'>{{ currentPuzzle.seed }}</a> (for permalink and debugging)</p>

@@ -9,7 +9,7 @@ declare var require: any;
 declare global {
   interface Window { 
     question: (p: number) => string; 
-    
+    zebra4jGenerateQuestionPuzzle: (players: number, seed: string) => string;
   }
 
   interface Math {
@@ -33,10 +33,16 @@ export class GameComponent implements OnInit {
     const seedrandom = require('seedrandom');
     window.Math.seedrandom = seedrandom;
     main();
-    this.currentPuzzle = this.generate();      
+    const seed = window.location.hash
+    this.currentPuzzle = this.generate(seed);
+    this.updateSeedInUrl();
    }
 
   ngOnInit(): void {
+  }
+
+  updateSeedInUrl(): void {
+    window.location.hash = this.currentPuzzle.seed;
   }
 
   select(event: Event): void {
@@ -48,12 +54,17 @@ export class GameComponent implements OnInit {
 
   reset() : void {
     this.completed = false;
-    this.selected = '';
+    this.selected = "";
     this.generateAsync();
   }
 
-  generate() : PuzzleDescription {
-    let puzzleJson = window.question(3);
+  generate(seed: string) : PuzzleDescription {    
+    let puzzleJson: string;
+    if (seed.length <= 1) {
+      puzzleJson = window.question(3);
+    } else {
+      puzzleJson = window.zebra4jGenerateQuestionPuzzle(3, seed.substring(1))
+    }
     return JSON.parse(puzzleJson) as PuzzleDescription;    
   }
 
@@ -61,11 +72,12 @@ export class GameComponent implements OnInit {
     this.generating = true;
     const myPromise = new Promise<PuzzleDescription>((resolve, reject) => {
       setTimeout(() => {
-        resolve(this.generate());
+        resolve(this.generate(""));
       }, 100);
     });
     this.currentPuzzle = await myPromise;
     this.generating = false;   
+    this.updateSeedInUrl();
   }
 
 }
