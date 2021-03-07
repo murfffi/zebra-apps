@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+const PLAYERS = 3;
 
 declare function main(): void;
 
@@ -61,9 +62,9 @@ export class GameComponent implements OnInit {
   generate(seed: string) : PuzzleDescription {    
     let puzzleJson: string;
     if (seed.length <= 1) {
-      puzzleJson = window.question(3);
+      puzzleJson = window.question(PLAYERS);
     } else {
-      puzzleJson = window.zebra4jGenerateQuestionPuzzle(3, seed.substring(1))
+      puzzleJson = window.zebra4jGenerateQuestionPuzzle(PLAYERS, seed.substring(1))
     }
     return JSON.parse(puzzleJson) as PuzzleDescription;    
   }
