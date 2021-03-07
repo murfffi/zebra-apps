@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.teavm.flavour.json.JSON;
 import org.teavm.jso.JSBody;
 
+import zebra4j.Attribute;
 import zebra4j.AttributeType;
 import zebra4j.Attributes;
 import zebra4j.PuzzleSolution;
@@ -44,18 +45,25 @@ public class Client {
 
 	static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Random rnd, String seed) {
 		Locale locale = Locale.getDefault();
-		PuzzleDescription description = new PuzzleDescription();
-		description.seed = seed;
 		PuzzleSolution sampleSolution = new SolutionGenerator(Attributes.DEFAULT_TYPES, numPeople, rnd).generate();
-		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(Question.generate(sampleSolution.getAttributeSets(), rnd),
-				sampleSolution, rnd, QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
+		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(
+				Question.generate(sampleSolution.getAttributeSets(), rnd), sampleSolution, rnd,
+				QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
 		QuestionPuzzle puzzle = generator.generate();
+		Attribute answer = puzzle.getQuestion().answer(sampleSolution).get();
+		PuzzleDescription description = describe(puzzle, locale);
+		description.answer = answer.description(locale);
+		description.seed = seed;
+		return description;
+	}
+
+	static PuzzleDescription describe(QuestionPuzzle puzzle, Locale locale) {
+		PuzzleDescription description = new PuzzleDescription();
 		description.facts = puzzle.describeConstraints(locale);
 		description.question = puzzle.getQuestion().describe(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
 		description.answerOptions = puzzle.getPuzzle().getAttributeSets().get(about).stream()
 				.map(a -> a.description(locale)).collect(Collectors.toList());
-		description.answer = puzzle.getQuestion().answer(sampleSolution).get().description(locale);
 		return description;
 	}
 }
