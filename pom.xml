@@ -14,7 +14,7 @@
 	<repositories>
 		<repository>
 			<id>teavm-dev</id>
-			<url>https://dl.bintray.com/konsoletyper/teavm</url>
+			<url>https://teavm.org/maven/repository</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -36,7 +36,7 @@
 	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<teavm.version>0.7.0-dev-1169</teavm.version>
+		<teavm.version>0.7.0-dev-1191</teavm.version>
 		<zebra4j.version>0.6-SNAPSHOT</zebra4j.version>
 	</properties>	
 	<build>
