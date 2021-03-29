@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import org.chocosolver.solver.ChocoSettings;
 import org.teavm.flavour.json.JSON;
 import org.teavm.jso.JSBody;
 
@@ -49,6 +50,7 @@ public class Client {
 		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(
 				Question.generate(sampleSolution.getAttributeSets(), rnd), sampleSolution, rnd,
 				QuestionPuzzleGenerator.DEFAULT_FACT_TYPES);
+		generator.setChocoSettings(new ChocoSettings());
 		QuestionPuzzle puzzle = generator.generate();
 		Attribute answer = puzzle.getQuestion().answer(sampleSolution).get();
 		PuzzleDescription description = describe(puzzle, locale);
