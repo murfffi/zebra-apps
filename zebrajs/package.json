@@ -1,0 +1,23 @@
+{
+  "name": "zebrajs",
+  "version": "0.1.0",
+  "description": "Generates and solves logic grid puzzles, like the famous zebra puzzle - https://en.wikipedia.org/wiki/Zebra_Puzzle ",
+  "main": "target",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murfffi/zebra-apps.git"
+  },
+  "keywords": [
+    "zebra-puzzle",
+    "logic-puzzle"
+  ],
+  "author": "Marin Nozhchev <murfffi@gmail.com> (https://github.com/murfffi/)",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/murfffi/zebra-apps/issues"
+  },
+  "homepage": "https://github.com/murfffi/zebra-apps#readme"
+}
