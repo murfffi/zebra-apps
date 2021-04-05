@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.murfffi.zebra-apps</groupId>
+		<artifactId>zebra-apps-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>zebra-module-example</artifactId>
+	<name>zebra4j Java module example</name>
+	<description>Example for using zebra4j in a Java modules project</description>
+	<properties>
+		<exec.mainClass>io.github.murfffi.zebramoduleexample/zebra4j.apps.Main</exec.mainClass>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>io.github.murfffi</groupId>
+			<artifactId>zebra4j</artifactId>
+			<version>0.6</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>java</executable>
+							<arguments>
+								<argument>--module-path</argument> <!-- or -p -->
+								<!-- automatically creates the modulepath using all project dependencies, 
+									also adding the project build directory -->
+								<modulepath />
+								<argument>--module</argument> <!-- or -m -->
+								<argument>${exec.mainClass}</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

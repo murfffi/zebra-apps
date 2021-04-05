@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Collection;
 
 import org.chocosolver.solver.ChocoSettings;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.teavm.junit.TeaVMTestRunner;
@@ -20,6 +21,7 @@ import zebra4j.PuzzleSolver;
 public class PuzzleGeneratorTest {
 
 	@Test
+	@Ignore // very slow
 	public void testGenerate() throws Exception {
 		PuzzleSolution startSolution = zebra4j.PuzzleGeneratorTest.sampleSolution();
 		PuzzleGenerator puzzleGenerator = new PuzzleGenerator(startSolution,

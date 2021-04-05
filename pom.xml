@@ -10,6 +10,7 @@
 	<modules>
 		<module>zebra-teavm</module>
 		<module>zebrajs</module>
+		<module>zebra-module-example</module>
 	</modules>
 	<repositories>
 		<repository>

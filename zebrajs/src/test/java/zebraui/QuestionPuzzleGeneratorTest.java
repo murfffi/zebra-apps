@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.HashSet;
 
-import org.junit.Ignore;
+import org.chocosolver.solver.ChocoSettings;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.teavm.junit.TeaVMTestRunner;
@@ -19,10 +19,8 @@ import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
 import zebra4j.QuestionPuzzleGenerator;
 import zebra4j.QuestionPuzzleSolver;
-import zebra4j.fact.Fact;
 
 @RunWith(TeaVMTestRunner.class)
-@Ignore // very slow
 public class QuestionPuzzleGeneratorTest {
 
 	/**
@@ -38,18 +36,16 @@ public class QuestionPuzzleGeneratorTest {
 		builder.addWithHouse(PersonName.IVAN, Clothes.RED, Criminal.NO);
 		var generator = new QuestionPuzzleGenerator(question, builder.build(),
 				AbstractPuzzleGenerator.DEFAULT_FACT_TYPES);
+		generator.setChocoSettings(new ChocoSettings());
 		var puzzle = generator.generate();
 
-		for (Fact f : puzzle.getPuzzle().getFacts()) {
-			var newFacts = new HashSet<>(puzzle.getPuzzle().getFacts());
-			newFacts.remove(f);
-			var newPuzzle = new QuestionPuzzle(puzzle.getQuestion(),
-					new Puzzle(puzzle.getPuzzle().getAttributeSets(), newFacts));
-			var solutions = new QuestionPuzzleSolver(newPuzzle).solve();
-			System.out.println(newPuzzle);
-			System.out.println(solutions);
-			assertTrue(solutions.size() > 1);
-		}
+		var newFacts = new HashSet<>(puzzle.getPuzzle().getFacts());
+		newFacts.remove(newFacts.iterator().next());
+		var newPuzzle = new QuestionPuzzle(puzzle.getQuestion(),
+				new Puzzle(puzzle.getPuzzle().getAttributeSets(), newFacts));
+		QuestionPuzzleSolver solver = new QuestionPuzzleSolver(newPuzzle);
+		solver.setChocoSettings(new ChocoSettings());
+		assertTrue(solver.solveToStream().limit(2).count() > 1);
 	}
 
 }
