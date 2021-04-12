@@ -24,7 +24,7 @@ declare global {
   styleUrls: ['./game.component.css'],
 })
 export class GameComponent implements OnInit {
-  currentPuzzle: PuzzleDescription;
+  currentPuzzle: PuzzleDescription = JSON.parse('{}') as PuzzleDescription;
   selected = '';
 
   generating = false;
@@ -35,8 +35,7 @@ export class GameComponent implements OnInit {
     window.Math.seedrandom = seedrandom;
     main();
     const seed = window.location.hash
-    this.currentPuzzle = this.generate(seed);
-    this.updateSeedInUrl();
+    this.generateAsync(seed);
    }
 
   ngOnInit(): void {
@@ -56,29 +55,19 @@ export class GameComponent implements OnInit {
   reset() : void {
     this.completed = false;
     this.selected = "";
-    this.generateAsync();
+    this.generateAsync("");
   }
 
-  generate(seed: string) : PuzzleDescription {    
-    let puzzleJson: string;
-    if (seed.length <= 1) {
-      puzzleJson = window.question(PLAYERS);
-    } else {
-      puzzleJson = window.zebra4jGenerateQuestionPuzzle(PLAYERS, seed.substring(1))
-    }
-    return JSON.parse(puzzleJson) as PuzzleDescription;    
-  }
-
-  async generateAsync() {
+  generateAsync(seed: string) {
     this.generating = true;
-    const myPromise = new Promise<PuzzleDescription>((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.generate(""));
-      }, 100);
-    });
-    this.currentPuzzle = await myPromise;
-    this.generating = false;   
-    this.updateSeedInUrl();
+    // Create a new
+    const worker = new Worker('./gamewk.worker', { type: 'module' });
+    worker.onmessage = ({ data }) => {
+      this.currentPuzzle = JSON.parse(data) as PuzzleDescription;
+      this.generating = false;   
+      this.updateSeedInUrl();
+    };
+    worker.postMessage(seed);
   }
 
 }
