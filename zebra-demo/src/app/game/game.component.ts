@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-const PLAYERS = 3;
+const PLAYERS = 4;
 
 declare function main(): void;
 

@@ -158,7 +158,7 @@
 							<sourceFilesCopied>true</sourceFilesCopied>
 
 							<!-- Optimization level. Valid values are: SIMPLE, ADVANCED, FULL -->
-							<optimizationLevel>SIMPLE</optimizationLevel>
+							<optimizationLevel>FULL</optimizationLevel>
 						</configuration>
 					</execution>
 				</executions>
