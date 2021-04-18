@@ -54,8 +54,7 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
 					<configuration>
-						<!-- 11 fails with teavm 0.7-dev-1169 -->
-						<release>11</release>
+						<release>14</release>
 					</configuration>
 				</plugin>
 				<plugin>
