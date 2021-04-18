@@ -49,7 +49,7 @@ public class TPrintStream extends TFilterOutputStream {
 	public TPrintStream(TOutputStream out, boolean autoFlush) {
 		super(out);
 		this.autoFlush = autoFlush;
-		this.charset = new TUTF8Charset();
+		this.charset = TUTF8Charset.INSTANCE;
 	}
 
 	public TPrintStream(TOutputStream out) {
@@ -231,18 +231,18 @@ public class TPrintStream extends TFilterOutputStream {
 		print('\n');
 	}
 
+	private void printSB() {
+		char[] buffer = sb.length() > this.buffer.length ? new char[sb.length()] : this.buffer;
+		sb.getChars(0, sb.length(), buffer, 0);
+		print(buffer, 0, sb.length());
+		sb.setLength(0);
+	}
+
 	/**
 	 * ZEBRA4J: No-op implementation referenced by ChocoSolver, but not used at
 	 * runtime
 	 */
 	public TPrintStream printf(String format, Object... args) {
 		return this;
-	}
-
-	private void printSB() {
-		char[] buffer = sb.length() > this.buffer.length ? new char[sb.length()] : this.buffer;
-		sb.getChars(0, sb.length(), buffer, 0);
-		print(buffer, 0, sb.length());
-		sb.setLength(0);
 	}
 }
