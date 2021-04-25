@@ -4,6 +4,13 @@ import java.util.Random;
 
 import org.teavm.jso.JSBody;
 
+/**
+ * TeaVM random with seed support based on seedrandom library
+ * 
+ * <p>
+ * Requires https://github.com/davidbau/seedrandom#readme to be imported.
+ *
+ */
 public class SeededRandom extends Random {
 
 	private static final long serialVersionUID = 1L;

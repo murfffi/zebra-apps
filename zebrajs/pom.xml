@@ -62,6 +62,13 @@
 			<classifier>tests</classifier>
 			<scope>test</scope>
 		</dependency>
+		<!-- Override the htmlunit version used on teavm-junit -->
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>2.49.1</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.teavm</groupId>
 			<artifactId>teavm-junit</artifactId>
