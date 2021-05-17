@@ -40,7 +40,8 @@ public class Client {
 	}
 
 	private static String generatePuzzleWithSeed(int numPeople, String seed) {
-		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, new SeededRandom(seed), seed);
+		SeededRandom rnd = new SeededRandom(Long.valueOf(seed));
+		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, rnd, seed);
 		return JSON.serialize(description).stringify();
 	}
 
