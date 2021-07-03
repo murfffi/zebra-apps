@@ -28,7 +28,9 @@ public class PuzzleGeneratorTest {
 				AbstractPuzzleGenerator.DEFAULT_FACT_TYPES);
 		puzzleGenerator.setChocoSettings(new ChocoSettings());
 		Puzzle puzzle = puzzleGenerator.generate();
-		Collection<PuzzleSolution> result = new PuzzleSolver(puzzle, new ChocoSettings()).solve();
+		PuzzleSolver solver = new PuzzleSolver(puzzle);
+		solver.setChocoSettings(new ChocoSettings());
+		Collection<PuzzleSolution> result = solver.solve();
 		assertTrue(result.contains(startSolution));
 		assertEquals(1, result.size());
 	}

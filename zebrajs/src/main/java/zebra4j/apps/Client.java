@@ -1,7 +1,6 @@
 package zebra4j.apps;
 
 import java.util.Locale;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.chocosolver.solver.ChocoSettings;
@@ -16,6 +15,7 @@ import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
 import zebra4j.QuestionPuzzleGenerator;
 import zebra4j.SolutionGenerator;
+import zebra4j.util.Randomness;
 
 public class Client {
 
@@ -40,11 +40,12 @@ public class Client {
 	}
 
 	private static String generatePuzzleWithSeed(int numPeople, String seed) {
-		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, new SeededRandom(seed), seed);
+		SeededRandom rnd = new SeededRandom(Long.valueOf(seed));
+		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, rnd, seed);
 		return JSON.serialize(description).stringify();
 	}
 
-	static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Random rnd, String seed) {
+	static PuzzleDescription generateQuestionPuzzleDescription(int numPeople, Randomness rnd, String seed) {
 		Locale locale = Locale.getDefault();
 		PuzzleSolution sampleSolution = new SolutionGenerator(Attributes.DEFAULT_TYPES, numPeople, rnd).generate();
 		QuestionPuzzleGenerator generator = new QuestionPuzzleGenerator(

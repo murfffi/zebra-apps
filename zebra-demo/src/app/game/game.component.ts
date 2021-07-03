@@ -4,17 +4,10 @@ const PLAYERS = 4;
 
 declare function main(): void;
 
-// TODO try to fix using https://stackoverflow.com/a/35961176/1551798
-declare var require: any;
-
 declare global {
   interface Window { 
     question: (p: number) => string; 
     zebra4jGenerateQuestionPuzzle: (players: number, seed: string) => string;
-  }
-
-  interface Math {
-    seedrandom: (seed: string) => void;
   }
 }
 
@@ -31,8 +24,6 @@ export class GameComponent implements OnInit {
   completed = false;
 
   constructor() {
-    const seedrandom = require('seedrandom');
-    window.Math.seedrandom = seedrandom;
     main();
     const seed = window.location.hash
     this.currentPuzzle = this.generate(seed);

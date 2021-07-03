@@ -12,7 +12,9 @@ public class PuzzleSolverTest extends zebra4j.PuzzleSolverTest {
 
 	@Override
 	protected PuzzleSolver createTestSolver(Puzzle puzzle) {
-		return new PuzzleSolver(puzzle, new ChocoSettings());
+		PuzzleSolver solver = new PuzzleSolver(puzzle);
+		solver.setChocoSettings(new ChocoSettings());
+		return solver;
 	}
 
 }
