@@ -1,29 +1,32 @@
 package zebra4j.apps;
 
-import java.util.Random;
+import java.util.List;
 
-import org.teavm.jso.JSBody;
+import org.apache.commons.rng.UniformRandomProvider;
+import org.apache.commons.rng.core.source64.SplitMix64;
+import org.apache.commons.rng.sampling.ListSampler;
+
+import zebra4j.util.Randomness;
 
 /**
- * TeaVM random with seed support based on seedrandom library
- * 
- * <p>
- * Requires https://github.com/davidbau/seedrandom#readme to be imported.
- *
+ * {@link Randomness} with seed support based on commons-rng library
  */
-public class SeededRandom extends Random {
+public class SeededRandom implements Randomness {
 
-	private static final long serialVersionUID = 1L;
+	private UniformRandomProvider rnd;
 
 	public SeededRandom(long seed) {
-		seedRandom(String.valueOf(seed));
+		rnd = new SplitMix64(seed);
 	}
 
-	public SeededRandom(String seed) {
-		seedRandom(seed);
+	@Override
+	public void shuffle(List<?> list) {
+		ListSampler.shuffle(rnd, list);
 	}
 
-	@JSBody(params = { "seed" }, script = "Math.seedrandom(seed);")
-	private static native void seedRandom(String seed);
+	@Override
+	public int nextInt(int bound) {
+		return rnd.nextInt(bound);
+	}
 
 }

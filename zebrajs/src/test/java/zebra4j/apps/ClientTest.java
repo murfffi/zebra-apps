@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Set;
 
 import org.junit.Test;
@@ -30,7 +29,7 @@ public class ClientTest {
 	@Test
 	public void testGenerateQuestionPuzzleDescription() {
 		int numPeople = 3;
-		PuzzleDescription output = Client.generateQuestionPuzzleDescription(numPeople, new Random(), "1");
+		PuzzleDescription output = Client.generateQuestionPuzzleDescription(numPeople, new SeededRandom(1), "1");
 		assertNotNull(output.seed);
 		assertEquals(numPeople, output.answerOptions.size());
 		assertTrue(output.answerOptions.contains(output.answer));
