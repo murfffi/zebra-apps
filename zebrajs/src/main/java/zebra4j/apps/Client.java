@@ -19,27 +19,25 @@ import zebra4j.util.Randomness;
 
 public class Client {
 
+	private static final String EXPORT_SCRIPT = """
+exports[name] = func
+""";
+
 	@JSBody(params = { "message" }, script = "console.log(message)")
 	private static native void log(String message);
 
-	@JSBody(params = { "name", "func" }, script = "window[name] = func")
-	private static native void setGenerator(String name, Generator func);
-
-	@JSBody(params = { "name", "func" }, script = "window[name] = func")
+	@JSBody(params = { "name", "func" }, script = EXPORT_SCRIPT)
 	private static native void setSeededGenerator(String name, SeededGenerator func);
 
 	public static void main(String[] args) {
-		setGenerator("question", Client::generateQuestionPuzzle);
-		setSeededGenerator("zebra4jGenerateQuestionPuzzle", Client::generatePuzzleWithSeed);
+		setSeededGenerator("generateQuestionPuzzle", Client::generatePuzzleWithSeed);
 		log("Function initialized.");
 	}
 
-	private static String generateQuestionPuzzle(int numPeople) {
-		long seed = System.currentTimeMillis();
-		return generatePuzzleWithSeed(numPeople, String.valueOf(seed));
-	}
-
 	private static String generatePuzzleWithSeed(int numPeople, String seed) {
+		if ("".equals(seed)) {
+			seed = String.valueOf(System.currentTimeMillis());
+		}
 		SeededRandom rnd = new SeededRandom(Long.valueOf(seed));
 		PuzzleDescription description = generateQuestionPuzzleDescription(numPeople, rnd, seed);
 		return JSON.serialize(description).stringify();
