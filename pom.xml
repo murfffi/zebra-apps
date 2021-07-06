@@ -54,8 +54,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.1</version>
 					<configuration>
-						<!-- TeaVM 0.7.0-1191 fails with JDK 16, despite "release 14" -->
-						<release>14</release>
+						<!-- TeaVM 0.7.0-1191 fails with JDK 16, despite "release 15" -->						
+						<!-- Release is 15 because we use text blocks and TeaVM has some issue with preview features. -->
+						<release>15</release>
 					</configuration>
 				</plugin>
 				<plugin>

@@ -29,3 +29,7 @@ www-test/
 .idea
 *.iml
 zebra-demo/debug.log
+zebrajs/zebrajs.js
+node_modules/
+package-lock.json
+package.json

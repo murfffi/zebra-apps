@@ -2,14 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 const PLAYERS = 4;
 
-declare function main(): void;
-
-declare global {
-  interface Window { 
-    question: (p: number) => string; 
-    zebra4jGenerateQuestionPuzzle: (players: number, seed: string) => string;
-  }
-}
+// TODO try to fix using https://stackoverflow.com/a/35961176/1551798
+declare var require: any;
 
 @Component({
   selector: 'app-game',
@@ -22,10 +16,10 @@ export class GameComponent implements OnInit {
 
   generating = false;
   completed = false;
+  zebra4j = require('zebra-puzzle');
 
   constructor() {
-    main();
-    const seed = window.location.hash
+    const seed = window.location.hash;
     this.currentPuzzle = this.generate(seed);
     this.updateSeedInUrl();
    }
@@ -52,11 +46,7 @@ export class GameComponent implements OnInit {
 
   generate(seed: string) : PuzzleDescription {    
     let puzzleJson: string;
-    if (seed.length <= 1) {
-      puzzleJson = window.question(PLAYERS);
-    } else {
-      puzzleJson = window.zebra4jGenerateQuestionPuzzle(PLAYERS, seed.substring(1))
-    }
+    puzzleJson = this.zebra4j.generateQuestionPuzzle(PLAYERS, seed.substring(1))
     return JSON.parse(puzzleJson) as PuzzleDescription;    
   }
 
