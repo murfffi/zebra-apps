@@ -12,7 +12,7 @@ import org.teavm.junit.TeaVMTestRunner;
 import zebra4j.AbstractPuzzleGenerator;
 import zebra4j.Attribute;
 import zebra4j.PersonName;
-import zebra4j.Puzzle;
+import zebra4j.BasicPuzzle;
 import zebra4j.PuzzleGenerator;
 import zebra4j.PuzzleGeneratorTest;
 import zebra4j.Question;
@@ -27,7 +27,7 @@ public class QuestionPuzzleSolverTest {
 		PuzzleGenerator generator = new PuzzleGenerator(PuzzleGeneratorTest.simpleSolutionWithCriminal(),
 				AbstractPuzzleGenerator.DEFAULT_FACT_TYPES);
 		generator.setChocoSettings(new ChocoSettings());
-		Puzzle basicPuzzle = generator.generate();
+		BasicPuzzle basicPuzzle = generator.generate();
 		QuestionPuzzle questionPuzzle = new QuestionPuzzle(Question.NAME_OF_CRIMINAL, basicPuzzle);
 		QuestionPuzzleSolver solver = new QuestionPuzzleSolver(questionPuzzle);
 		solver.setChocoSettings(new ChocoSettings());

@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.teavm.junit.TeaVMTestRunner;
 
 import zebra4j.AbstractPuzzleGenerator;
-import zebra4j.Puzzle;
+import zebra4j.BasicPuzzle;
 import zebra4j.PuzzleGenerator;
 import zebra4j.PuzzleSolution;
 import zebra4j.PuzzleSolver;
@@ -27,7 +27,7 @@ public class PuzzleGeneratorTest {
 		PuzzleGenerator puzzleGenerator = new PuzzleGenerator(startSolution,
 				AbstractPuzzleGenerator.DEFAULT_FACT_TYPES);
 		puzzleGenerator.setChocoSettings(new ChocoSettings());
-		Puzzle puzzle = puzzleGenerator.generate();
+		BasicPuzzle puzzle = puzzleGenerator.generate();
 		PuzzleSolver solver = new PuzzleSolver(puzzle);
 		solver.setChocoSettings(new ChocoSettings());
 		Collection<PuzzleSolution> result = solver.solve();

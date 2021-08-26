@@ -31,6 +31,14 @@ import org.chocosolver.solver.search.strategy.Search;
 import org.chocosolver.solver.search.strategy.strategy.AbstractStrategy;
 import org.chocosolver.util.ESat;
 
+/**
+ * {@link Settings} based on {@link DefaultSettings} but without features not
+ * supported by TeaVM
+ *
+ * <p>
+ * Removed loading of settings from property file. Can't be removed without
+ * copying the code.
+ */
 @SuppressWarnings("rawtypes")
 public class ChocoSettings implements Settings {
 

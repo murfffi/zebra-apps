@@ -1,7 +1,5 @@
 package zebraui;
 
-import java.util.HashMap;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +21,6 @@ public class PuzzleSolutionTest {
 	@Test
 	public void testEqualsHashcode() {
 		PuzzleSolution sol = zebra4j.PuzzleGeneratorTest.sampleSolution();
-		Assert.assertEquals(sol, new PuzzleSolution(sol.getPeople(), new HashMap<>(sol.getAttributeSets())));
 		Assert.assertEquals(sol, otherSolution());
 		Assert.assertEquals(sol.hashCode(), otherSolution().hashCode());
 	}

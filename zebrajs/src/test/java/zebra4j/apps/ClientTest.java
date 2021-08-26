@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import zebra4j.AtHouse;
 import zebra4j.PersonName;
-import zebra4j.Puzzle;
+import zebra4j.BasicPuzzle;
 import zebra4j.PuzzleGeneratorTest;
 import zebra4j.PuzzleSolution;
 import zebra4j.Question;
@@ -43,7 +43,7 @@ public class ClientTest {
 		assertEquals(3, solution.getAttributeSets().size());
 		Set<Fact> facts = Collections.singleton(new BothTrue(PersonName.PETER, new AtHouse(1)));
 		QuestionPuzzle puzzle = new QuestionPuzzle(new Question(PersonName.PETER, AtHouse.TYPE),
-				new Puzzle(solution.getAttributeSets(), facts));
+				new BasicPuzzle(solution.getAttributeSets(), facts));
 
 		PuzzleDescription description = Client.describe(puzzle, Locale.getDefault());
 		assertEquals(2 + facts.size(), description.facts.size());

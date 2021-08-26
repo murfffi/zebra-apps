@@ -20,8 +20,9 @@ import zebra4j.util.Randomness;
 public class Client {
 
 	private static final String EXPORT_SCRIPT = """
-exports[name] = func
-""";
+			exports[name] = func
+			export let name = func
+			""";
 
 	@JSBody(params = { "message" }, script = "console.log(message)")
 	private static native void log(String message);
@@ -63,7 +64,7 @@ exports[name] = func
 		description.facts = puzzle.describeConstraints(locale);
 		description.question = puzzle.getQuestion().describe(locale);
 		AttributeType about = puzzle.getQuestion().getAbout();
-		description.answerOptions = puzzle.getPuzzle().getAttributeSets().get(about).stream()
+		description.answerOptions = puzzle.getBasicPuzzle().getAttributeSets().get(about).stream()
 				.map(a -> a.description(locale)).collect(Collectors.toList());
 		return description;
 	}

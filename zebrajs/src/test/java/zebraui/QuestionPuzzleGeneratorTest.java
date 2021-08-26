@@ -13,7 +13,7 @@ import zebra4j.AbstractPuzzleGenerator;
 import zebra4j.Clothes;
 import zebra4j.Criminal;
 import zebra4j.PersonName;
-import zebra4j.Puzzle;
+import zebra4j.BasicPuzzle;
 import zebra4j.PuzzleSolutionBuilder;
 import zebra4j.Question;
 import zebra4j.QuestionPuzzle;
@@ -39,10 +39,10 @@ public class QuestionPuzzleGeneratorTest {
 		generator.setChocoSettings(new ChocoSettings());
 		var puzzle = generator.generate();
 
-		var newFacts = new HashSet<>(puzzle.getPuzzle().getFacts());
+		var newFacts = new HashSet<>(puzzle.getBasicPuzzle().getFacts());
 		newFacts.remove(newFacts.iterator().next());
 		var newPuzzle = new QuestionPuzzle(puzzle.getQuestion(),
-				new Puzzle(puzzle.getPuzzle().getAttributeSets(), newFacts));
+				new BasicPuzzle(puzzle.getBasicPuzzle().getAttributeSets(), newFacts));
 		QuestionPuzzleSolver solver = new QuestionPuzzleSolver(newPuzzle);
 		solver.setChocoSettings(new ChocoSettings());
 		assertTrue(solver.solveToStream().limit(2).count() > 1);
