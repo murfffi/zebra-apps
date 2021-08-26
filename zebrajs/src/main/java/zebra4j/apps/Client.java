@@ -21,7 +21,6 @@ public class Client {
 
 	private static final String EXPORT_SCRIPT = """
 			exports[name] = func
-			export let name = func
 			""";
 
 	@JSBody(params = { "message" }, script = "console.log(message)")
