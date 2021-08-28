@@ -33,8 +33,8 @@
 	</repositories>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<teavm.version>0.7.0-dev-1195</teavm.version>
-		<zebra4j.version>0.9-SNAPSHOT</zebra4j.version>
+		<teavm.version>0.7.0-dev-1196</teavm.version>
+		<zebra4j.version>0.9</zebra4j.version>
 	</properties>
 	<build>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven 
