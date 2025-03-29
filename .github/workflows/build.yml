@@ -40,6 +40,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '15'
+        distribution: 'adopt'
     - name: Build and test with Maven
       if: steps.cache-zebrajs.outputs.cache-hit != 'true'
       run: mvn -B package --file pom.xml
